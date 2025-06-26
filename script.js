@@ -1,66 +1,28 @@
-// ---- Fade-in при прокрутке ----
+// Анимация появления
 const faders = document.querySelectorAll('.fade-in');
-const appear = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('appear');
-    });
-  },
+const io = new IntersectionObserver(
+  entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('appear')),
   { threshold: 0.2 }
 );
-faders.forEach(el => appear.observe(el));
+faders.forEach(el => io.observe(el));
 
-// ---- Логика формы ----
-const form        = document.getElementById('request-form');
-const statusText  = document.getElementById('form-status');
-const errorName   = document.getElementById('error-name');
-const errorEmail  = document.getElementById('error-email');
-const errorMsg    = document.getElementById('error-message');
+// Валидация формы Netlify
+const form = document.getElementById('request-form');
+const status = document.getElementById('form-status');
+const errName = document.getElementById('error-name');
+const errMail = document.getElementById('error-email');
+const errMsg  = document.getElementById('error-message');
 
 form.addEventListener('submit', e => {
-  e.preventDefault();
-
-  // Очистить сообщения об ошибках
-  [errorName, errorEmail, errorMsg].forEach(el => (el.textContent = ''));
-
-  // Валидировать
-  let valid = true;
-  if (!form.name.value.trim()) {
-    errorName.textContent = 'Naam is verplicht';
-    valid = false;
-  }
+  // Netlify всё равно перехватит POST, но доп-валидация удобна юзеру
+  errName.textContent = errMail.textContent = errMsg.textContent = '';
+  if (!form.name.value.trim())   { errName.textContent  = 'Naam is verplicht';   e.preventDefault(); }
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRe.test(form.email.value.trim())) {
-    errorEmail.textContent = 'Ongeldig e-mailadres';
-    valid = false;
+  if (!emailRe.test(form.email.value.trim())) { errMail.textContent = 'Ongeldig e-mailadres'; e.preventDefault(); }
+  if (!form.message.value.trim()) { errMsg.textContent = 'Bericht is verplicht'; e.preventDefault(); }
+
+  if (!e.defaultPrevented) {
+    status.textContent = 'Bedankt! Uw aanvraag wordt verzonden…';
+    // после отправки Netlify сделает редирект на /thanks.html
   }
-  if (!form.message.value.trim()) {
-    errorMsg.textContent = 'Bericht is verplicht';
-    valid = false;
-  }
-  if (!valid) return;
-
-  statusText.textContent = 'Verzenden...';
-  form.querySelector('button').disabled = true;
-
-  // Параметры для EmailJS
-  const templateParams = {
-    name:    form.name.value,
-    email:   form.email.value,
-    phone:   form.phone.value,
-    message: form.message.value
-  };
-
-  emailjs
-    .send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-    .then(() => {
-      statusText.textContent = 'Bedankt! Uw aanvraag is verzonden.';
-      form.reset();
-      form.querySelector('button').disabled = false;
-    })
-    .catch(() => {
-      statusText.textContent =
-        'Er is een fout opgetreden. Probeer later opnieuw.';
-      form.querySelector('button').disabled = false;
-    });
 });
