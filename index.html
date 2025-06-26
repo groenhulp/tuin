@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GroenHulp Dienstverlening</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- EmailJS SDK -->
+  <script type="text/javascript"
+    src="https://cdn.emailjs.com/sdk/3.2/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init("service_zar7wb6"); /* Замените YOUR_EMAILJS_USER_ID */
+    })();
+  </script>
+</head>
+<body>
+  <header>
+    <img src="img/freepik__background__86190.png" alt="Logo">
+    <h1>GroenHulp Dienstverlening</h1>
+    <p>Uw tuin, onze zorg</p>
+  </header>
+
+  <section>
+    <h2>Onze diensten</h2>
+    <ul>
+      <li>Gras maaien</li>
+      <li>Randen afsnijden</li>
+      <li>Onkruid verwijderen</li>
+      <li>Tegels reinigen met hogedruk</li>
+    </ul>
+  </section>
+
+  <!-- Форма внизу страницы -->
+  <section id="contact-form">
+    <h2>Laat een bericht achter</h2>
+    <form id="request-form">
+      <label for="name">Naam:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">Telefoon:</label>
+      <input type="tel" id="phone" name="phone">
+
+      <label for="message">Bericht:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Verzenden</button>
+    </form>
+    <p id="form-status"></p>
+  </section>
+
+  <footer>
+    &copy; 2025 GroenHulp. Alle rechten voorbehouden.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
