@@ -1,67 +1,160 @@
+/* Reset */
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #e8f5e9;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #e8f5e9;
   color: #2e7d32;
-}
-header {
-  background-color: #66bb6a;
-  padding: 20px;
-  text-align: center;
-}
-header img {
-  height: 100px;
-}
-section {
-  padding: 30px;
-  max-width: 800px;
-  margin: auto;
-}
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-ul li::before {
-  content: '✅';
-  margin-right: 10px;
-}
-#contact-form h2 {
-  text-align: center;
-}
-#contact-form form {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 500px;
-  margin: auto;
-}
-#contact-form input,
-#contact-form textarea {
-  padding: 8px;
-  border: 1px solid #2e7d32;
-  border-radius: 4px;
-}
-#contact-form button {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #2e7d32;
-  color: white;
-  font-size: 1em;
-  cursor: pointer;
-}
-#contact-form button:hover {
-  background-color: #1b5e20;
-}
-#form-status {
-  text-align: center;
-  margin-top: 10px;
-  font-weight: bold;
 }
 
-footer {
-  background-color: #a5d6a7;
+main { flex: 1; }
+
+/* ---------- ШАПКА ---------- */
+header {
+  background: #66bb6a;
   text-align: center;
-  padding: 15px;
-  margin-top: 30px;
+  padding: 24px 12px 32px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  box-shadow: 0 2px 14px rgba(0,0,0,.13);
+}
+header img      { height: 90px; margin-bottom: 12px; }
+header h1       { margin: 0 0 8px; font-size: 2.1rem; font-weight: 700; }
+header p        { margin: 0 0 16px; font-size: 1.15rem; }
+
+.call-btn{
+  display:inline-block;
+  padding:14px 28px;
+  background:#ffeb3b;
+  color:#1b5e20;
+  border-radius:10px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+  transition:background .2s, transform .15s;
+}
+.call-btn:hover{ background:#fdd835; transform:translateY(-3px); }
+
+/* ---------- СЕКЦИИ ---------- */
+section{
+  padding:34px 16px;
+  max-width:850px;
+  margin:20px auto;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 2px 16px rgba(0,0,0,.09);
+  transition:box-shadow .3s;
+}
+section:hover{ box-shadow:0 4px 28px rgba(0,0,0,.12); }
+.about{ background:#f1fdf2; }
+
+/* Услуги */
+.diensten ul{ list-style:none; padding:0; margin-top:22px; }
+.diensten li{ display:flex; align-items:center; gap:14px; font-size:1.1em; margin-bottom:16px; }
+.icon{
+  width:40px; height:40px;
+  display:flex; align-items:center; justify-content:center;
+  background:#b2dfdb55;
+  border-radius:12px;
+}
+.icon img{ width:24px; height:24px; }
+
+/* Отзывы */
+.testimonials{ background:#f9fdfa; }
+.testimonial{
+  background:#d7ffd9;
+  border-radius:12px;
+  padding:18px 20px 12px;
+  margin:18px 0;
+  box-shadow:0 1px 6px rgba(0,0,0,.1);
+  font-style:italic;
+}
+.testimonial span{
+  display:block;
+  margin-top:8px;
+  font-size:.95em;
+  color:#388e3c;
+  font-style:normal;
+  text-align:right;
+}
+
+/* Форма */
+#contact-form{ background:#e8f5e9; }
+#contact-form form{
+  display:flex; flex-direction:column; gap:12px;
+  max-width:540px; margin:auto; margin-bottom:20px;
+}
+#contact-form input, #contact-form textarea{
+  padding:10px 12px;
+  border:1px solid #a5d6a7;
+  border-radius:6px;
+  font-size:1em;
+  transition:border .2s;
+}
+#contact-form input:focus, #contact-form textarea:focus{
+  border-color:#2e7d32; outline:none;
+}
+#contact-form button{
+  padding:14px 0;
+  border:none;
+  border-radius:6px;
+  background:#2e7d32;
+  color:#fff;
+  font-size:1.05em;
+  font-weight:700;
+  cursor:pointer;
+  transition:background .2s;
+}
+#contact-form button:disabled{ background:#a5d6a7; cursor:not-allowed; }
+#contact-form button:hover:enabled{ background:#388e3c; }
+
+.error-message{ color:#d32f2f; font-size:.9em; min-height:18px; }
+#form-status{ text-align:center; font-weight:700; margin-top:12px; }
+
+/* ---------- Липкая WhatsApp ---------- */
+.whatsapp-float{
+  position:fixed; bottom:20px; right:20px;
+  width:60px; height:60px;
+  background:#25d366;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.25);
+  z-index:999;
+  transition:background .2s, transform .15s;
+}
+.whatsapp-float img{ width:32px; height:32px; }
+.whatsapp-float:hover{ background:#1ebe54; transform:scale(1.07); }
+
+/* ---------- Анимация появления ---------- */
+.fade-in{ opacity:0; transform:translateY(24px); animation:fadeInUp .85s forwards ease-out; }
+@keyframes fadeInUp{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* ---------- Адаптивность ---------- */
+@media (max-width:600px){
+  header img{ height:56px; }
+  header h1{ font-size:1.4rem; }
+  header{ padding:18px 8px 26px; }
+  .call-btn{ font-size:1em; padding:12px 20px; }
+  section{ padding:22px 12px; border-radius:14px; }
+  .diensten li{ font-size:1em; }
+  .icon{ width:34px; height:34px; }
+  .icon img{ width:20px; height:20px; }
+  .whatsapp-float{ width:50px; height:50px; bottom:15px; right:15px; }
+  .whatsapp-float img{ width:28px; height:28px; }
+}
+
+/* ---------- Футер ---------- */
+footer{
+  background:#a5d6a7;
+  text-align:center;
+  padding:18px 10px;
+  margin-top:30px;
+  border-top-left-radius:18px;
+  border-top-right-radius:18px;
 }
