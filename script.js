@@ -15,14 +15,14 @@ const errMsg  = document.getElementById('error-message');
 
 form.addEventListener('submit', e => {
   // Netlify всё равно перехватит POST, но доп-валидация удобна юзеру
-  errName.textContent = errMail.textContent = errMsg.textContent = '';
-  if (!form.name.value.trim())   { errName.textContent  = 'Naam is verplicht';   e.preventDefault(); }
-  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRe.test(form.email.value.trim())) { errMail.textContent = 'Ongeldig e-mailadres'; e.preventDefault(); }
-  if (!form.message.value.trim()) { errMsg.textContent = 'Bericht is verplicht'; e.preventDefault(); }
+  // errName.textContent = errMail.textContent = errMsg.textContent = '';
+  // if (!form.name.value.trim())   { errName.textContent  = 'Naam is verplicht';   e.preventDefault(); }
+  // const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // if (!emailRe.test(form.email.value.trim())) { errMail.textContent = 'Ongeldig e-mailadres'; e.preventDefault(); }
+  // if (!form.message.value.trim()) { errMsg.textContent = 'Bericht is verplicht'; e.preventDefault(); }
 
-  if (!e.defaultPrevented) {
-    status.textContent = 'Bedankt! Uw aanvraag wordt verzonden…';
-    // после отправки Netlify сделает редирект на /thanks.html
-  }
+  // if (!e.defaultPrevented) {
+  //   status.textContent = 'Bedankt! Uw aanvraag wordt verzonden…';
+  //   // после отправки Netlify сделает редирект на /thanks.html
+  // }
 });
